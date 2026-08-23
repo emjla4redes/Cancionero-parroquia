@@ -11,6 +11,7 @@
       --accent-color: #3498db;
       --text-color: #ffffff;
       --text-secondary: #bdc3c7;
+      --refrain-color: #f39c12; /* Color destacado para el estribillo */
     }
 
     * {
@@ -142,6 +143,12 @@
       color: #f1f2f6;
     }
 
+    /* Estilo especial para la negrita / estribillo */
+    .lyrics-container strong, .estribillo {
+      font-weight: bold;
+      color: var(--refrain-color);
+    }
+
     .lyrics-title {
       font-size: 1.6rem;
       color: var(--accent-color);
@@ -187,19 +194,81 @@
   </main>
 
   <script>
+    // BASE DE DATOS DE CANCIONES
+    // Nota: Puedes usar *texto en negrita* o escribir [Estribillo] antes de la estrofa.
     const songs = [
-      { id: 1, title: "Alabaré a mi Señor", topic: "ENTRADA", lyrics: "Alabaré, alabaré,\nalabaré, alabaré,\nalabaré a mi Señor.\n\nJuan vio el número de los redimidos\ny todos alababan al Señor..." },
-      { id: 2, title: "Cerca está el Señor", topic: "ENTRADA", lyrics: "Cerca está el Señor,\ncerca de su pueblo,\ncerca de quien lo invoca de corazón." },
-      { id: 3, title: "Señor ten piedad (Tradicional)", topic: "SEÑOR, TEN PIEDAD", lyrics: "Señor, ten piedad de nosotros.\nCristo, ten piedad de nosotros.\nSeñor, ten piedad de nosotros." },
-      { id: 4, title: "Gloria a Dios en el Cielo", topic: "GLORIA", lyrics: "Gloria a Dios en el cielo\ny en la tierra paz a los hombres que ama el Señor." },
-      { id: 5, title: "Aleluya folclórico", topic: "ALALEUYA", lyrics: "Aleluya, aleluya,\nel Señor es nuestro rey." },
-      { id: 6, title: "Entre tus manos", topic: "OFERTORIO", lyrics: "Entre tus manos pongo mi vida, Señor.\nEntre tus manos pongo mi existir.\nHay que morir para vivir.\nEntre tus manos confío mi ser." },
-      { id: 7, title: "Santo es el Señor mi Dios", topic: "SANTO", lyrics: "Santo es el Señor mi Dios, digno de alabanza,\na Él el poder, el honor y la gloria." },
-      { id: 8, title: "Cordero de Dios", topic: "CORDERO DE DIOS", lyrics: "Cordero de Dios que quitas el pecado del mundo,\nten piedad de nosotros." },
-      { id: 9, title: "Pescador de hombres", topic: "COMUNIÓN", lyrics: "Tú has venido a la orilla,\nno has buscado ni a sabios ni a ricos,\ntan solo quieres que yo te siga.\n\nSeñor, me has mirado a los ojos..." },
-      { id: 10, title: "Junto a ti María", topic: "CANTOS A MARÍA", lyrics: "Junto a ti María, como un niño quiero estar,\ntómame en tus brazos guíame en mi caminar." },
-      { id: 11, title: "Altísimo Señor", topic: "ADORACIÓN", lyrics: "Altísimo Señor, que supiste juntar\na un tiempo en el altar ser soberano y pan." },
-      { id: 12, title: "Espíritu Santo Ven", topic: "CONFIRMACIONES", lyrics: "Espíritu Santo ven, ven.\nEspíritu Santo ven, ven.\nEn el nombre del Señor." }
+      { 
+        id: 1, 
+        title: "Alabaré a mi Señor", 
+        topic: "ENTRADA", 
+        lyrics: "*Alabaré, alabaré,*\n*alabaré, alabaré,*\n*alabaré a mi Señor.*\n\nJuan vio el número de los redimidos\ny todos alababan al Señor..." 
+      },
+      { 
+        id: 2, 
+        title: "Cerca está el Señor", 
+        topic: "ENTRADA", 
+        lyrics: "*Cerca está el Señor,*\ncerca de su pueblo,\ncerca de quien lo invoca de corazón." 
+      },
+      { 
+        id: 3, 
+        title: "Señor ten piedad (Tradicional)", 
+        topic: "SEÑOR, TEN PIEDAD", 
+        lyrics: "Señor, ten piedad de nosotros.\nCristo, ten piedad de nosotros.\nSeñor, ten piedad de nosotros." 
+      },
+      { 
+        id: 4, 
+        title: "Gloria a Dios en el Cielo", 
+        topic: "GLORIA", 
+        lyrics: "*Gloria a Dios en el cielo\ny en la tierra paz a los hombres que ama el Señor.*" 
+      },
+      { 
+        id: 5, 
+        title: "Aleluya folclórico", 
+        topic: "ALALEUYA", 
+        lyrics: "*Aleluya, aleluya,\nel Señor es nuestro rey.*" 
+      },
+      { 
+        id: 6, 
+        title: "Entre tus manos", 
+        topic: "OFERTORIO", 
+        lyrics: "[Estribillo]\nEntre tus manos pongo mi vida, Señor.\nEntre tus manos pongo mi existir.\nHay que morir para vivir.\nEntre tus manos confío mi ser." 
+      },
+      { 
+        id: 7, 
+        title: "Santo es el Señor mi Dios", 
+        topic: "SANTO", 
+        lyrics: "*Santo es el Señor mi Dios, digno de alabanza,\na Él el poder, el honor y la gloria.*" 
+      },
+      { 
+        id: 8, 
+        title: "Cordero de Dios", 
+        topic: "CORDERO DE DIOS", 
+        lyrics: "Cordero de Dios que quitas el pecado del mundo,\nten piedad de nosotros." 
+      },
+      { 
+        id: 9, 
+        title: "Pescador de hombres", 
+        topic: "COMUNIÓN", 
+        lyrics: "Tú has venido a la orilla,\nno has buscado ni a sabios ni a ricos,\ntan solo quieres que yo te siga.\n\n[Estribillo]\nSeñor, me has mirado a los ojos,\nsonriendo has dicho mi nombre.\nEn la arena he dejado mi barca:\njunto a Ti buscaré otro mar." 
+      },
+      { 
+        id: 10, 
+        title: "Junto a ti María", 
+        topic: "CANTOS A MARÍA", 
+        lyrics: "*Junto a ti María, como un niño quiero estar,\ntómame en tus brazos guíame en mi caminar.*" 
+      },
+      { 
+        id: 11, 
+        title: "Altísimo Señor", 
+        topic: "ADORACIÓN", 
+        lyrics: "Altísimo Señor, que supiste juntar\na un tiempo en el altar ser soberano y pan." 
+      },
+      { 
+        id: 12, 
+        title: "Espíritu Santo Ven", 
+        topic: "CONFIRMACIONES", 
+        lyrics: "*Espíritu Santo ven, ven.\nEspíritu Santo ven, ven.\nEn el nombre del Señor.*" 
+      }
     ];
 
     const topics = [
@@ -208,7 +277,6 @@
       "CANTOS A MARÍA", "ADORACIÓN", "CONFIRMACIONES"
     ];
 
-    // Historial con elementos formateados: { viewId: string, title: string }
     let navigationHistory = [{ viewId: 'view-home', title: 'CANCIONERO PARROQUIA DE LA ASUNCIÓN LA RAMBLA' }];
 
     function hideAllViews() {
@@ -337,10 +405,17 @@
       navigateTo('view-songs-list', topic);
     }
 
-    // MOSTRAR LETRA
+    // MOSTRAR LETRA CON FORMATO DE ESTRIBILLO / NEGRITA
     function showLyrics(song) {
       document.getElementById('song-title').innerText = `${song.id}. ${song.title}`;
-      document.getElementById('song-body').innerText = song.lyrics;
+      
+      let formattedLyrics = song.lyrics
+        // Formato con asteriscos: *texto* -> negrita
+        .replace(/\*(.*?)\*/g, '<strong class="estribillo">$1</strong>')
+        // Formato con etiqueta [Estribillo] -> negrita y destacado
+        .replace(/\[Estribillo\]/gi, '<strong class="estribillo">[Estribillo]</strong>');
+
+      document.getElementById('song-body').innerHTML = formattedLyrics;
       navigateTo('view-lyrics', 'LETRA');
     }
   </script>
